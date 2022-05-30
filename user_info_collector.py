@@ -1,17 +1,23 @@
+import math
+import json
 import requests
-from bs4 import BeautifulSoup
+# Multiple functions that handles different aspects of certain player's profile
 
+api_key = "REDACTED"
 
-url = "https://www.leagueoflegends.com/en-us/champions/"
-page = requests.get(url)
-soup = BeautifulSoup(page.content, "html.parser")
+# Handling Previous Matches/Match history
+def match_history(league_username, server):
+    # First get the Summoner ID from summoner-v4 API
+    req_url = "https://{}.api.riotgames.com/lol/summoner/v4/summoners/by-name/{}?api_key={}".format(server, league_username, api_key)
+    req_res = requests.get(req_url)
+    # Status Code Filter in case of an error either server side or api key...
+    if ("200" not in str(req_res)):
+        # TODO later - add some different results and response depending on the various status code returned from the request
+        print("Something went wrong")
+    player_data = json.loads(req_res.text)
+    player_id = player_data["id"]
+    print(player_id)
 
-champ_lists = []
-results = soup.findAll("span", {"class" : "style__Text-n3ovyt-3 gMLOLF"})
+    #now get rest of the info
 
-for champ in results:
-    if (len(champ.text) > 0 and champ.text not in champ_lists):
-
-        champ_lists.append(champ.text.rstrip())
-print(champ_lists)
-print(len(champ_lists))
+match_history("Ping Difference", "na1")
