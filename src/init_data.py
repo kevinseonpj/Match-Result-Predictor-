@@ -33,6 +33,7 @@ rank_elo = {'IRON_IIII': 0,
 
 # Champ list update by scraping the league of legend offical website and stores
 # it in a mapped/dict format
+# yes, it could be created at the user info collection but I found this organization more clear in my head
 def champ_list():
     url = "https://www.leagueoflegends.com/en-us/champions/"
     page = requests.get(url)
@@ -43,6 +44,14 @@ def champ_list():
 
     for num, champ in enumerate(results):
         if (len(champ.text) > 0 and champ.text not in champ_lists):
-
-            champ_lists[champ.text.rstrip()] = num + 1
-
+            # get rid of any spaces
+            champ_text = champ.text.replace(' ', '')
+            # get rid of apostrophe
+            if '\'' in champ.text.rstrip():
+                champ_text = ''.join(champ.text.split('\''))
+            # lol riot has wukong as monkey king
+            if champ_text.lower() == "wukong":
+                champ_text = "monkeyking"
+            # 0th idx is for idxing the champs and other two slots for k/d/a average over all game, kda, and games played
+            champ_lists[champ_text.lower()] = [num + 1, 0, 0, 0, 0, 0]
+    return champ_lists
