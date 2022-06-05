@@ -7,7 +7,7 @@ from datetime import datetime
 
 # Multiple functions that handles different aspects of certain player's profile
 
-api_key = "RGAPI-94ced4ae-905d-4e14-b3b7-23bafc52a15e"
+api_key = "REDACTED"
 
 def error_handling():
     return
