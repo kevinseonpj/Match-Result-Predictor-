@@ -2,12 +2,12 @@ import math
 import json
 import sys
 import requests
-import init_data as loldata
+import info_src.init_data as loldata
 from datetime import datetime
 
 # Multiple functions that handles different aspects of certain player's profile
 
-api_key = "REDACTED"
+api_key = "none"
 
 def error_handling():
     return
@@ -115,7 +115,7 @@ def player_stats(region, matches, player_name):
 
     # win rate per role, and overall wr updated
     res['wr'] = round(res['wr'] / len(matches) * 100)
-    res['pos_w'] = [round(x / y * 100, 2) for x, y in zip(res['pos_w'], res['pos'])]
+    res['pos_w'] = [round(x / (y + sys.float_info.epsilon) * 100, 2) for x, y in zip(res['pos_w'], res['pos'])]
 
     # Champion data updated 
     for champ in res['champs']:
@@ -124,8 +124,17 @@ def player_stats(region, matches, player_name):
             res['champs'][champ][1:4] = [round(x / res['champs'][champ][5], 2) for x in res['champs'][champ][1:4]]
     return res
 
-id = get_id("Ping Difference", "na1", "puuid")
-matches = get_matches(id, routing_values("NA"), 420, "ranked", 100, epoch_start_time())
+# Combines all the functionality to some extent
+def player_summary(username, region):
+    #only NA1 at the moment!
+    id = get_id(username, "na1", "puuid")
+    matches = get_matches(id, routing_values(region), 420, "ranked", 100, epoch_start_time())
+    return player_stats(routing_values(region), matches, username)
+
+# Some examples of the usage
+
+# id = get_id("Ping Difference", "na1", "puuid")
+# matches = get_matches(id, routing_values("NA"), 420, "ranked", 100, epoch_start_time())
 # req_url = "https://{}.api.riotgames.com/lol/match/v5/matches/{}?api_key={}".format("americas", "NA1_4220235820", api_key)
 # req_res = requests.get(req_url)
 # req_res = json.loads(req_res.text)
@@ -141,4 +150,4 @@ matches = get_matches(id, routing_values("NA"), 420, "ranked", 100, epoch_start_
     #     print(json.loads(req_res.text)['info']['participants'][i]['championName'])
     #     print(json.loads(req_res.text)['info']['participants'][i]['win'])
     #     print('------------------------')
-print(player_stats(routing_values("NA"), matches, "ping difference"))
+# print(player_stats(routing_values("NA"), matches, "ping difference"))
