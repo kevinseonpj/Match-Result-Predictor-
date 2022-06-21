@@ -7,7 +7,7 @@ from datetime import datetime
 
 # Multiple functions that handles different aspects of certain player's profile
 
-api_key = "none"
+api_key = "RGAPI-bd04f9ac-e717-4c59-a468-815cf9ef4abf"
 
 def error_handling():
     return
@@ -122,6 +122,8 @@ def player_stats(region, matches, player_name):
         if(res['champs'][champ][5] > 0):
             res['champs'][champ][4] = round((res['champs'][champ][3] + res['champs'][champ][1]) / res['champs'][champ][2] + sys.float_info.epsilon, 2)
             res['champs'][champ][1:4] = [round(x / res['champs'][champ][5], 2) for x in res['champs'][champ][1:4]]
+    # Dictionary to list -- may need to revert if do need the dict functionality
+    res['top5'] = sorted(res['champs'].items(), key=lambda x: x[1][5], reverse=1)[:5]
     return res
 
 # Combines all the functionality to some extent

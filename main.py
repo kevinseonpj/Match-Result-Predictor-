@@ -6,7 +6,7 @@ app = Flask(__name__)
 @app.route("/", methods=['GET'])
 def init_load():
     regions = ["RU", "BR", "LAN", "LAS", "OCE", "KR", "JP", "EUNE", "EUW", "TR", "NA"]
-    return render_template('index.html', regions=regions, positions = ' ' * 4)
+    return render_template('index.html', regions=regions, positions = ' ' * 5, champ5 = [[' '] * 6] * 5)
 
 @app.route("/test", methods=['GET', 'POST'])
 def data():
@@ -15,7 +15,7 @@ def data():
         region = request.form.get('regions_data')
         username = request.form.get('username_data')
         res = player_summary(username, region)
-        return render_template('index.html', regions = regions, positions = res['pos'], test2 = str(username))
+        return render_template('index.html', regions = regions, positions = res['pos'], champ5 = res["top5"])
     elif request.method == 'GET':
         return redirect('/')
 

@@ -182,15 +182,16 @@
                     <div class="bg-gray-900 border border-gray-800 rounded shadow p-2">
                         <div class="flex flex-row items-center">
                             <!-- <div class="flex-shrink pr-4">
-                                <div class="rounded p-3 bg-blue-600"><i class="fas fa-server fa-2x fa-fw fa-inverse"></i></div>
+                                <div class="rounded p-3 bg-indigo-600"><i class="fas fa-tasks fa-2x fa-fw fa-inverse"></i></div>
                             </div> -->
                             <div class="flex-1 text-right md:text-center">
-                                <h5 class="font-bold uppercase text-gray-400">Each Position Game Played</h5>
-                                <h3 class="font-bold text-3xl text-gray-600" value= "{{positions}}"> Top - {{positions[0]}}</h3>
-                                <h3 class="font-bold text-3xl text-gray-600" value= "{{positions}}"> JG - {{positions[1]}}</h3>
-                                <h3 class="font-bold text-3xl text-gray-600" value= "{{positions}}"> Mid - {{positions[2]}}</h3>
-                                <h3 class="font-bold text-3xl text-gray-600" value= "{{positions}}"> ADC - {{positions[3]}}</h3>
-                                <h3 class="font-bold text-3xl text-gray-600" value= "{{positions}}"> Sup - {{positions[4]}}</h3>
+                                <h5 class="font-bold uppercase text-gray-400">Champions Played</h5>
+                                
+                                <h3 class="font-bold text-l text-gray-600" value = '{{champ5}}'>{{champ5[0][0].title()}} - Games Played: {{champ5[0][1][5]}}, KDA: {{champ5[0][1][4]}}</h3>
+                                <h3 class="font-bold text-l text-gray-600" value = '{{champ5}}'>{{champ5[1][0].title()}} - Games Played: {{champ5[1][1][5]}}, KDA: {{champ5[1][1][4]}}</h3>
+                                <h3 class="font-bold text-l text-gray-600" value = '{{champ5}}'>{{champ5[2][0].title()}} - Games Played: {{champ5[2][1][5]}}, KDA: {{champ5[2][1][4]}}</h3>
+                                <h3 class="font-bold text-l text-gray-600" value = '{{champ5}}'>{{champ5[3][0].title()}} - Games Played: {{champ5[3][1][5]}}, KDA: {{champ5[3][1][4]}}</h3>
+                                <h3 class="font-bold text-l text-gray-600" value = '{{champ5}}'>{{champ5[4][0].title()}} - Games Played: {{champ5[4][1][5]}}, KDA: {{champ5[4][1][4]}}</h3>
                             </div>
                         </div>
                     </div>
@@ -201,13 +202,15 @@
                     <div class="bg-gray-900 border border-gray-800 rounded shadow p-2">
                         <div class="flex flex-row items-center">
                             <!-- <div class="flex-shrink pr-4">
-                                <div class="rounded p-3 bg-indigo-600"><i class="fas fa-tasks fa-2x fa-fw fa-inverse"></i></div>
+                                <div class="rounded p-3 bg-blue-600"><i class="fas fa-server fa-2x fa-fw fa-inverse"></i></div>
                             </div> -->
                             <div class="flex-1 text-right md:text-center">
-                                <h5 class="font-bold uppercase text-gray-400">Stats</h5>
-                                <h3 class="font-bold text-3xl text-gray-600">----</h3>
-                                <h3 class="font-bold text-3xl text-gray-600">----</h3>
-                                <h3 class="font-bold text-3xl text-gray-600">----</h3>
+                                <h5 class="font-bold uppercase text-gray-400">Each Position Game Played</h5>
+                                <h3 class="font-bold text-xl text-gray-600" value= "{{positions}}"> Top - {{positions[0]}}</h3>
+                                <h3 class="font-bold text-xl text-gray-600" value= "{{positions}}"> JG - {{positions[1]}}</h3>
+                                <h3 class="font-bold text-xl text-gray-600" value= "{{positions}}"> Mid - {{positions[2]}}</h3>
+                                <h3 class="font-bold text-xl text-gray-600" value= "{{positions}}"> ADC - {{positions[3]}}</h3>
+                                <h3 class="font-bold text-xl text-gray-600" value= "{{positions}}"> Sup - {{positions[4]}}</h3>
                             </div>
                         </div>
                     </div>
