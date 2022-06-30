@@ -8,7 +8,7 @@ from pymongo import MongoClient
 
 # Multiple functions that handles different aspects of certain player's profile
 
-api_key = "RGAPI-e393ff9c-1057-48b0-9aaf-146e25f930a2"
+api_key = "none"
 
 def error_handling():
     return
