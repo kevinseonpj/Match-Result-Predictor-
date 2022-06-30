@@ -1,6 +1,8 @@
 from flask import Flask, render_template, request, redirect
 from info_src.user_info_collector import player_summary
 
+#Temp app.py to test and purely test out the display of the result
+
 app = Flask(__name__)
 
 @app.route("/", methods=['GET'])

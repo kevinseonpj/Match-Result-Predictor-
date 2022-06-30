@@ -4,10 +4,11 @@ import sys
 import requests
 import info_src.init_data as loldata
 from datetime import datetime
+from pymongo import MongoClient
 
 # Multiple functions that handles different aspects of certain player's profile
 
-api_key = "RGAPI-bd04f9ac-e717-4c59-a468-815cf9ef4abf"
+api_key = "RGAPI-e393ff9c-1057-48b0-9aaf-146e25f930a2"
 
 def error_handling():
     return
@@ -113,7 +114,7 @@ def player_stats(region, matches, player_name):
         # champion play count
         res['champs'][champion_name][5] += 1
 
-    # win rate per role, and overall wr updated
+    # win rate per role, and overall wr updated account for non players-0matches like somebody
     res['wr'] = round(res['wr'] / len(matches) * 100)
     res['pos_w'] = [round(x / (y + sys.float_info.epsilon) * 100, 2) for x, y in zip(res['pos_w'], res['pos'])]
 
@@ -132,6 +133,22 @@ def player_summary(username, region):
     id = get_id(username, "na1", "puuid")
     matches = get_matches(id, routing_values(region), 420, "ranked", 100, epoch_start_time())
     return player_stats(routing_values(region), matches, username)
+
+# Now we do need to process the data into mongodb and we will use it again when we are doing the prediction
+# We also will run and store the training data that we will make.
+def get_database():
+    
+
+    # Provide the mongodb atlas url later
+    CONNECTION_STRING = "mongodb+srv://<username>:<password>@<cluster-name>.mongodb.net/myFirstDatabase"
+    client = MongoClient(CONNECTION_STRING)
+    # Create the database for our example (we will use the same database throughout the tutorial
+    return client['TEST']
+    
+# # This is added so that many files can reuse the function get_database()
+# if __name__ == "__main__":    
+#     # Get the database
+#     dbname = get_database()
 
 # Some examples of the usage
 
